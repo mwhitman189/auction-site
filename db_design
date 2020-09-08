@@ -1,0 +1,40 @@
+			Models:
+- User
+- AuctionListing
+- Bid
+- Comment
+
+			Fields:
+User
+	?- avatar: BinaryField(blank=True)
+
+Rating
+	- evaluator: (one, fk)
+	- seller: (one, fk)
+	- rating: DecimalField(max_digits=13, decimal_places=2)
+
+AuctionListing
+	- name: CharField(max=64)
+	- category: CharField(max=64)
+	- starting_bid: DecimalField(max_digits=13, decimal_places=2)
+	- buyout_price: DecimalField(max_digits=13, decimal_places=2)
+	- details: TextField(max_length=400)
+	?- img: BinaryField(blank=True)
+	- expiration: DateTimeField(default=NOW_+_72_hours)
+	- seller (one)
+	- bidder (many)
+	- timestamp: DateField.auto_now
+
+Bid
+	- bidder (one, fk)
+	- auction_listing (one, fk)
+	- amount: DecimalField(max_digits=13, decimal_places=2)
+	- is_active: BooleanField
+	- timestamp: DateField.auto_now
+
+Comment
+	- commenter (one, fk)
+	- auction_listing (one, fk)
+	- comment: TextField(max_length=400)
+	- votes: IntegerField
+	- timestamp: DateField.auto_now
