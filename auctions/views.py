@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.db.models import Count
 
 from .models import User, AuctionListing
 
@@ -12,9 +13,20 @@ def index(request):
     return render(request, "auctions/index.html", {"listings": listings})
 
 
+def categories(request):
+    categories = AuctionListing.objects.values(
+        'category').annotate(item_count=Count('category'))
+    return render(request, "auctions/categories.html", {"categories": categories})
+
+
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(id=listing_id)
     return render(request, "auctions/listing.html", {"listing": listing})
+
+
+def category(request, category):
+    category_items = AuctionListing.objects.filter(category=category)
+    return render(request, "auctions/category.html", {"category": category, "category_items": category_items})
 
 
 def login_view(request):
