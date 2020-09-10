@@ -43,6 +43,16 @@ class AuctionListing(models.Model):
         return f"{self.name} in {self.category} by {self.seller_id}"
 
 
+class WatchList(models.Model):
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="user")
+    listing_ids = models.ForeignKey(
+        AuctionListing, on_delete=models.CASCADE, related_name="watchlist_listings")
+
+    def __str__(self):
+        return f"{self.user_id}'s items: {self.listing_ids}"
+
+
 class Bid(models.Model):
     bidder_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="bidder")

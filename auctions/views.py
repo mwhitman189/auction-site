@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Count
+from .forms import NewListingForm
 
 from .models import User, AuctionListing
 
@@ -13,15 +14,22 @@ def index(request):
     return render(request, "auctions/index.html", {"listings": listings})
 
 
+def listing(request, listing_id):
+    listing = AuctionListing.objects.get(id=listing_id)
+    return render(request, "auctions/listing.html", {"listing": listing})
+
+
+def new_listing(request):
+    if request.method == "POST":
+        return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
+    else:
+        return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
+
+
 def categories(request):
     categories = AuctionListing.objects.values(
         'category').annotate(item_count=Count('category'))
     return render(request, "auctions/categories.html", {"categories": categories})
-
-
-def listing(request, listing_id):
-    listing = AuctionListing.objects.get(id=listing_id)
-    return render(request, "auctions/listing.html", {"listing": listing})
 
 
 def category(request, category):
