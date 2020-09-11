@@ -19,7 +19,7 @@ class User(AbstractUser):
 class Rating(models.Model):
     evaluator_ids = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="evaluator")
-    seller_id = models.ForeignKey(
+    seller = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="rating_seller")
     rating = models.DecimalField(
         validators=[MaxValueValidator(5)], max_digits=2, decimal_places=1)
@@ -67,9 +67,9 @@ class AuctionListing(models.Model):
     starting_bid = models.DecimalField(max_digits=13, decimal_places=2)
     buyout_price = models.DecimalField(max_digits=13, decimal_places=2)
     details = models.TextField(max_length=400)
-    img = models.BinaryField(blank=True)
+    img = models.URLField(blank=True)
     expiration = models.DateTimeField(default=return_exp_datetime)
-    seller_id = models.ForeignKey(
+    seller = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="auctionlisting_seller")
 
     def __str__(self):
@@ -87,9 +87,9 @@ class WatchList(models.Model):
 
 
 class Bid(models.Model):
-    bidder_id = models.ForeignKey(
+    bidder = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="bidder")
-    listing_id = models.ForeignKey(
+    listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE, related_name="bid_listing")
     amount = models.DecimalField(max_digits=13, decimal_places=2)
     is_active = models.BooleanField()
@@ -100,9 +100,9 @@ class Bid(models.Model):
 
 
 class Comment(models.Model):
-    commentor_id = models.ForeignKey(
+    commentor = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commentor")
-    listing_id = models.ForeignKey(
+    listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE, related_name="comment_listing")
     comment = models.TextField(max_length=150)
     votes = models.IntegerField()

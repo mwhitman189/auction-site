@@ -6,6 +6,10 @@
 {% block body %}
 <h1 class="title">Create New Listing</h1>
 
-{{form}}
+<form action="{% url 'auctions:new_listing' %}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" />
+</form>
 
 {% endblock %}

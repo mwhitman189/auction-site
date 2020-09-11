@@ -21,7 +21,18 @@ def listing(request, listing_id):
 
 def new_listing(request):
     if request.method == "POST":
-        return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
+        form = NewListingForm(request.POST)
+
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.seller = request.user
+            listing.save()
+
+            return HttpResponseRedirect(reverse("auctions:listing", args={listing.id}))
+
+        else:
+            return render(request, "auctions/new_listing.html", {"form": form})
+
     else:
         return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
 
