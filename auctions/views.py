@@ -4,9 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Count
-from .forms import NewListingForm
+from .forms import NewListingForm, NewBidForm
 
-from .models import User, AuctionListing
+from .models import User, AuctionListing, Bid
 
 
 def index(request):
@@ -16,7 +16,34 @@ def index(request):
 
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(id=listing_id)
-    return render(request, "auctions/listing.html", {"listing": listing})
+    if Bid.objects.get(listing=listing_id, is_active=True) is not None:
+        bid_object = Bid.objects.get(listing=listing_id, is_active=True)
+        current_bid = bid_object.amount
+    else:
+        current_bid = None
+
+    if request.method == "POST":
+        form = NewBidForm(request.POST)
+
+        if form.is_valid():
+            if current_bid > form.cleaned_data["amount"]:
+                return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": form, "errors": ["Bid must be higher than current bid"]})
+            else:
+                current_bid = form.cleaned_data["amount"]
+                # Deactivate old bids
+                bid_object.is_active = False
+                bid_object.save()
+
+                bid = form.save(commit=False)
+                bid.listing = listing
+                bid.bidder = request.user
+                bid.save()
+
+                return render(request, "auctions/listing.html", {"listing": listing, "current_bid": bid.amount, "form": NewBidForm()})
+        else:
+            return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": form})
+
+    return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": NewBidForm()})
 
 
 def new_listing(request):

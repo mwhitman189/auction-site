@@ -1,4 +1,13 @@
 {% extends "auctions/layout.html" %} {%block title%}{{listing.name}}{%endblock%}
 {% block body %}
-<h2>{{listing}}</h2>
-TODO {% endblock %}
+<h1 class="title">{{listing.name}}</h1>
+<h2 class="heading">Current bid: {{current_bid}}</h2>
+<form action="{% url 'auctions:listing' listing.id%}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+</form>
+<h2>Buyout: {{listing.buyout_price}}</span></h2>
+<div class="info">
+Description: {{listing.details}}
+
+{% endblock %}

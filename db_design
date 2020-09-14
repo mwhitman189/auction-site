@@ -19,7 +19,7 @@ AuctionListing
 	- starting_bid: DecimalField(max_digits=13, decimal_places=2)
 	- buyout_price: DecimalField(max_digits=13, decimal_places=2)
 	- details: TextField(max_length=400)
-	?- img: BinaryField(blank=True)
+	- img: URLField(blank=True)
 	- expiration: DateTimeField(default=NOW_+_72_hours)
 	- seller (one)
 	- bidder (many)

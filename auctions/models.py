@@ -17,15 +17,15 @@ class User(AbstractUser):
 
 
 class Rating(models.Model):
-    evaluator_ids = models.ForeignKey(
+    evaluator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="evaluator")
     seller = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="rating_seller")
+        User, on_delete=models.CASCADE, related_name="seller")
     rating = models.DecimalField(
         validators=[MaxValueValidator(5)], max_digits=2, decimal_places=1)
 
     def __str__(self):
-        return f"{self.seller_id} ({self.rating})"
+        return f"{self.seller} ({self.rating})"
 
 
 class AuctionListing(models.Model):
@@ -62,7 +62,7 @@ class AuctionListing(models.Model):
         ("CNN", "Computers/Tablets & Networking"),
     ]
 
-    name = models.CharField(max_length=64)
+    item = models.CharField(max_length=64)
     category = models.CharField(max_length=3, choices=CATEGORY_CHOICES)
     starting_bid = models.DecimalField(max_digits=13, decimal_places=2)
     buyout_price = models.DecimalField(max_digits=13, decimal_places=2)
@@ -70,43 +70,44 @@ class AuctionListing(models.Model):
     img = models.URLField(blank=True)
     expiration = models.DateTimeField(default=return_exp_datetime)
     seller = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="auctionlisting_seller")
+        User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.name} in {self.category} by {self.seller_id}"
+        return f"{self.item}"
 
 
 class WatchList(models.Model):
-    user_id = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="user")
-    listing_ids = models.ForeignKey(
-        AuctionListing, on_delete=models.CASCADE, related_name="watchlist_listings")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+    listing = models.ForeignKey(
+        AuctionListing, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user_id}'s items: {self.listing_ids}"
+        return f"{self.user}'s items: {self.listing}"
 
 
 class Bid(models.Model):
     bidder = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="bidder")
+        User, on_delete=models.CASCADE)
     listing = models.ForeignKey(
-        AuctionListing, on_delete=models.CASCADE, related_name="bid_listing")
+        AuctionListing, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=13, decimal_places=2)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=True)
+    is_winner = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.bidder_id} - {self.amount} ({self.is_active})"
+        return f"{self.bidder} - {self.amount} ({self.is_active})"
 
 
 class Comment(models.Model):
     commentor = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="commentor")
+        User, on_delete=models.CASCADE)
     listing = models.ForeignKey(
-        AuctionListing, on_delete=models.CASCADE, related_name="comment_listing")
+        AuctionListing, on_delete=models.CASCADE)
     comment = models.TextField(max_length=150)
     votes = models.IntegerField()
     timestamp = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f"{self.commentor_id} on {self.listing_id} at {self.timestamp}"
+        return f"{self.commentor} on {self.listing} at {self.timestamp}"
