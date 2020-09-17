@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "django_crontab",
     'auctions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +49,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRONTAB_COMMAND_SUFFIX = '2>&1'
+
+CRONJOBS = [
+    ('* * * * *', 'auctions.cron.closeoutExpiredListings',
+     '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log'),
 ]
 
 ROOT_URLCONF = 'commerce.urls'

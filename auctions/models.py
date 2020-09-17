@@ -69,6 +69,7 @@ class AuctionListing(models.Model):
     details = models.TextField(max_length=400)
     img = models.URLField(blank=True)
     expiration = models.DateTimeField(default=return_exp_datetime)
+    is_active = models.BooleanField(default=True)
     seller = models.ForeignKey(
         User, on_delete=models.CASCADE)
 
@@ -78,7 +79,7 @@ class AuctionListing(models.Model):
 
 class WatchList(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE, related_name="watchlist")
     listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE)
 

@@ -4,30 +4,40 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Count
-from .forms import NewListingForm, NewBidForm
 
-from .models import User, AuctionListing, Bid
+from .forms import NewListingForm, NewBidForm
+from .models import User, AuctionListing, Bid, WatchList
 
 
 def index(request):
     listings = AuctionListing.objects.all()
+
     return render(request, "auctions/index.html", {"listings": listings})
 
 
 def listing(request, listing_id):
     listing = AuctionListing.objects.get(id=listing_id)
-    if Bid.objects.get(listing=listing_id, is_active=True) is not None:
+
+    # Check for existing bids. If none are present, set the current bid to
+    # the listing starting_bid
+    if Bid.objects.filter(listing=listing_id, is_active=True).exists():
         bid_object = Bid.objects.get(listing=listing_id, is_active=True)
         current_bid = bid_object.amount
     else:
-        current_bid = None
+        current_bid = listing.starting_bid
 
     if request.method == "POST":
         form = NewBidForm(request.POST)
 
         if form.is_valid():
+            # If the current existing bid is greater than the input amount, return an error
             if current_bid > form.cleaned_data["amount"]:
-                return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": form, "errors": ["Bid must be higher than current bid"]})
+                return render(request, "auctions/listing.html", {
+                    "listing": listing,
+                    "current_bid": current_bid,
+                    "form": form,
+                    "error": "Bid must be higher than current bid"
+                })
             else:
                 current_bid = form.cleaned_data["amount"]
                 # Deactivate old bids
@@ -39,11 +49,23 @@ def listing(request, listing_id):
                 bid.bidder = request.user
                 bid.save()
 
-                return render(request, "auctions/listing.html", {"listing": listing, "current_bid": bid.amount, "form": NewBidForm()})
+                return render(request, "auctions/listing.html", {
+                    "listing": listing,
+                    "current_bid": bid.amount,
+                    "form": NewBidForm()
+                })
         else:
-            return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": form})
+            return render(request, "auctions/listing.html", {
+                "listing": listing,
+                "current_bid": current_bid,
+                "form": form
+            })
 
-    return render(request, "auctions/listing.html", {"listing": listing, "current_bid": current_bid, "form": NewBidForm()})
+    return render(request, "auctions/listing.html", {
+        "listing": listing,
+        "current_bid": current_bid,
+        "form": NewBidForm()
+    })
 
 
 def new_listing(request):
@@ -62,6 +84,19 @@ def new_listing(request):
 
     else:
         return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
+
+
+def new_watchlist_item(request, listing_id):
+    user = request.user
+    listing = AuctionListing.objects.get(id=listing_id)
+
+    if user.watchlist:
+        watchlist = WatchList(user=request.user, listing=listing)
+        watchlist.save()
+    else:
+        watchlist = WatchList.objects.get(user=user.id)
+
+    return HttpResponseRedirect(reverse("auctions:listing", args={listing_id}))
 
 
 def categories(request):

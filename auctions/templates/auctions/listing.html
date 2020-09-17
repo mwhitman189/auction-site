@@ -1,6 +1,11 @@
 {% extends "auctions/layout.html" %} {%block title%}{{listing.name}}{%endblock%}
 {% block body %}
 <h1 class="title">{{listing.name}}</h1>
+<button class="watchlist-btn" type="submit"
+    onclick="location.href='{% url 'auctions:new_watchlist_item' listing.id %}'">
+    Add to Watchlist
+</button>
+<p class="error">{{error}}</p>
 <h2 class="heading">Current bid: {{current_bid}}</h2>
 <form action="{% url 'auctions:listing' listing.id%}" method="POST">
     {% csrf_token %}
@@ -8,6 +13,6 @@
 </form>
 <h2>Buyout: {{listing.buyout_price}}</span></h2>
 <div class="info">
-Description: {{listing.details}}
+    Description: {{listing.details}}
 
-{% endblock %}
+    {% endblock %}
