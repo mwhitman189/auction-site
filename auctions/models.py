@@ -98,7 +98,7 @@ class Bid(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.bidder} - {self.amount} ({self.is_active})"
+        return f"{self.bidder} - {self.amount} ({self.listing.id} {self.is_active})"
 
 
 class Comment(models.Model):

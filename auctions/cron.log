@@ -1,1 +1,362 @@
 Working!
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:12:01.441162) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:12:01.441162
+1
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:13:02.044029) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:13:02.044029
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:14:01.523856) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:14:01.523856
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:15:01.999055) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:15:01.999055
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:16:01.490229) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:16:01.490229
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:17:02.511963) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:17:02.511963
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:18:02.242641) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:18:02.242641
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:19:02.032155) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:19:02.032155
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:20:01.735357) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:20:01.735357
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:21:02.177543) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:21:02.177543
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:22:01.673264) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:22:01.673264
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:23:02.087793) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id, is_active=True)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:23:02.087793
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:24:01.665843) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:24:01.665843
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:25:02.269456) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:25:02.269456
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:26:01.791856) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:26:01.791856
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:27:02.273306) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:27:02.273306
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:28:01.771118) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    bid = Bid.objects.get(listing=listing.id)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:28:01.771118
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:29:02.301071) while time zone support is active.
+  RuntimeWarning)
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id).exists():
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 431, in get
+    self.model._meta.object_name
+auctions.models.Bid.DoesNotExist: Bid matching query does not exist.
+2020-09-17 11:29:02.301071
+2
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:30:01.789755) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:30:01.789755
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:31:02.329029) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:31:02.329029
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:32:01.986491) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:32:01.986491
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:33:01.682288) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:33:01.682288
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:34:02.335488) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:34:02.335488
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:35:01.887511) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:35:01.887511
+/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/fields/__init__.py:1370: RuntimeWarning: DateTimeField AuctionListing.expiration received a naive datetime (2020-09-17 11:36:02.293257) while time zone support is active.
+  RuntimeWarning)
+2020-09-17 11:36:02.293257
+2020-09-17 11:37:01.840387+00:00
+2020-09-17 11:38:02.639063+00:00
+2020-09-17 11:39:02.411734+00:00
+2020-09-17 11:40:01.991829+00:00
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 12, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id).exists():
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 436, in get
+    num if not limit or num < limit else 'more than %s' % (limit - 1),
+auctions.models.Bid.MultipleObjectsReturned: get() returned more than one Bid -- it returned 2!
+2020-09-17 11:41:01.728717+00:00
+1
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 13, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id).exists():
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 436, in get
+    num if not limit or num < limit else 'more than %s' % (limit - 1),
+auctions.models.Bid.MultipleObjectsReturned: get() returned more than one Bid -- it returned 2!
+2020-09-17 11:42:02.354306+00:00
+<QuerySet [<AuctionListing: Boogie Board>]>
+1
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 13, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id).exists():
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django/db/models/query.py", line 436, in get
+    num if not limit or num < limit else 'more than %s' % (limit - 1),
+auctions.models.Bid.MultipleObjectsReturned: get() returned more than one Bid -- it returned 2!
+2020-09-17 11:43:01.859429+00:00
+<QuerySet [<AuctionListing: Boogie Board>]>
+1
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 13, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id, is_active=True).exists():
+AttributeError: 'Bid' object has no attribute 'exists'
+2020-09-17 11:44:02.412247+00:00
+<QuerySet [<AuctionListing: Boogie Board>]>
+1
+Failed to complete cronjob at ('* * * * *', 'auctions.cron.closeoutExpiredListings', '>> /home/miles/webdev/cs50-py-ja/commerce/auctions/cron.log')
+Traceback (most recent call last):
+  File "/home/miles/webdev/cs50-py-ja/env/lib/python3.6/site-packages/django_crontab/crontab.py", line 145, in run_job
+    func(*job_args, **job_kwargs)
+  File "/home/miles/webdev/cs50-py-ja/commerce/auctions/cron.py", line 13, in closeoutExpiredListings
+    if Bid.objects.get(listing=listing.id, is_active=True).exists():
+AttributeError: 'Bid' object has no attribute 'exists'
+2020-09-17 11:45:02.046670+00:00
+<QuerySet [<AuctionListing: Boogie Board>]>
+1
+2020-09-17 11:46:01.772618+00:00
+<QuerySet [<AuctionListing: Boogie Board>]>
+1
+exists
