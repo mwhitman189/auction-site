@@ -5,7 +5,7 @@
     {%for category in categories%}
     <li>
         <a href="{%url 'auctions:category' category.category%}"
-            >{{category.category}} ({{category.item_count}})</a
+            >{{category}} ({{category.item_count}})</a
         >
     </li>
     {%endfor%}

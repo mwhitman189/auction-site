@@ -123,7 +123,7 @@ def categories(request):
     """
     Return a list of item categories
     """
-    categories = AuctionListing.objects.values(
+    categories = AuctionListing.objects.only(
         'category').annotate(item_count=Count('category'))
     return render(request, "auctions/categories.html", {"categories": categories})
 

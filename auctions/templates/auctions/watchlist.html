@@ -6,11 +6,15 @@
 <h1 class="title">{{request.user}}'s Watchlist</h1>
 
 <ul>
-    {% for item in watchlist %}
-        <li class="list-item">
-            <a href="{% url 'auctions:listing' item.listing.id %}">{{item}}</a>
-        </li>
-    {% endfor %}
+    {% if watchlist %}
+        {% for item in watchlist %}
+            <li class="list-item">
+                <a href="{% url 'auctions:listing' item.listing.id %}">{{item}}</a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <div class="error">There are no items in your watchlist</div>
+    {% endif %}
 </ul>
 
 {% endblock %}
