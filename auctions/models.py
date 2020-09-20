@@ -84,7 +84,7 @@ class WatchList(models.Model):
         AuctionListing, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user}'s items: {self.listing}"
+        return f"{self.listing}"
 
 
 class Bid(models.Model):

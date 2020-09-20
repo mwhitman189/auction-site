@@ -16,6 +16,9 @@ def index(request):
 
 
 def listing(request, listing_id):
+    """
+    Return a listing with the given id
+    """
     listing = AuctionListing.objects.get(id=listing_id)
 
     # Check for existing bids. If none are present, set the current bid to
@@ -69,6 +72,9 @@ def listing(request, listing_id):
 
 
 def new_listing(request):
+    """
+    Return a form to create a new listing
+    """
     if request.method == "POST":
         form = NewListingForm(request.POST)
 
@@ -86,26 +92,46 @@ def new_listing(request):
         return render(request, "auctions/new_listing.html", {"form": NewListingForm()})
 
 
-def new_watchlist_item(request, listing_id):
+def watchlist(request):
+    """
+    Return the user's watchlist
+    """
+    watchlist = WatchList.objects.filter(user=request.user)
+
+    return render(request, "auctions/watchlist.html", {"watchlist": watchlist})
+
+
+def watchlist_toggle(request, listing_id):
+    """
+    Add a listing to the user's watchlist
+    """
     user = request.user
     listing = AuctionListing.objects.get(id=listing_id)
+    watchlist_item = WatchList.objects.filter(listing=listing)
 
-    if user.watchlist:
-        watchlist = WatchList(user=request.user, listing=listing)
-        watchlist.save()
+    if watchlist_item.exists():
+        watchlist_item.delete()
     else:
-        watchlist = WatchList.objects.get(user=user.id)
+        watchlist_item = WatchList(user=user, listing=listing)
+
+        watchlist_item.save()
 
     return HttpResponseRedirect(reverse("auctions:listing", args={listing_id}))
 
 
 def categories(request):
+    """
+    Return a list of item categories
+    """
     categories = AuctionListing.objects.values(
         'category').annotate(item_count=Count('category'))
     return render(request, "auctions/categories.html", {"categories": categories})
 
 
 def category(request, category):
+    """
+    Return a list of items for the given category
+    """
     category_items = AuctionListing.objects.filter(category=category)
     return render(request, "auctions/category.html", {"category": category, "category_items": category_items})
 

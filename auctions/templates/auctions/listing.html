@@ -1,18 +1,30 @@
-{% extends "auctions/layout.html" %} {%block title%}{{listing.name}}{%endblock%}
+{% extends "auctions/layout.html" %}
+
+{%block title%}{{listing.item}}{%endblock%}
+
 {% block body %}
-<h1 class="title">{{listing.name}}</h1>
+
+<h1 class="title">{{listing.item}}</h1>
+{% if listing.is_active %}
 <button class="watchlist-btn" type="submit"
-    onclick="location.href='{% url 'auctions:new_watchlist_item' listing.id %}'">
+    onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
     Add to Watchlist
 </button>
 <p class="error">{{error}}</p>
 <h2 class="heading">Current bid: {{current_bid}}</h2>
-<form action="{% url 'auctions:listing' listing.id%}" method="POST">
+<form action="{% url 'auctions:listing' listing.id %}" method="POST">
     {% csrf_token %}
     {{ form }}
 </form>
 <h2>Buyout: {{listing.buyout_price}}</span></h2>
 <div class="info">
     Description: {{listing.details}}
+
+{% elif bid.winner == user.id %}
+<h2 class="heading">You have bought {{listing}} for {{bid.amount}}</h2>
+
+{% else %}
+<h2 class="heading">This auction is closed</h2>
+{% endif %}
 
     {% endblock %}

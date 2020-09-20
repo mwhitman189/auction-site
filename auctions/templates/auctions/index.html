@@ -7,7 +7,11 @@
 
 <ul>
     {% for listing in listings %}
-    <li><a href="{%url 'auctions:listing' listing.id%}">{{listing}}</a></li>
+
+    {% if listing.is_active %}
+    <li><a href="{%url 'auctions:listing' listing.id %}">{{listing}}</a></li>
+    {% endif %}
+    
     {% endfor %}
 </ul>
 
