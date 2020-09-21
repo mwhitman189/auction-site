@@ -13,7 +13,7 @@ class User(AbstractUser):
     avatar = models.BinaryField(blank=True)
 
     def __str__(self):
-        return f"{self.username}"
+        return self.username
 
 
 class Rating(models.Model):
@@ -74,7 +74,7 @@ class AuctionListing(models.Model):
         User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.item}"
+        return self.item
 
 
 class WatchList(models.Model):
@@ -84,7 +84,7 @@ class WatchList(models.Model):
         AuctionListing, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.listing}"
+        return self.listing
 
 
 class Bid(models.Model):

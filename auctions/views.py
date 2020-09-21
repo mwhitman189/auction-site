@@ -3,7 +3,8 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.db.models import Count
+from django.utils.encoding import force_text
+from django.db.models import Count, CharField, When, Value, Case
 
 from .forms import NewListingForm, NewBidForm
 from .models import User, AuctionListing, Bid, WatchList
@@ -123,9 +124,16 @@ def categories(request):
     """
     Return a list of item categories
     """
-    categories = AuctionListing.objects.only(
-        'category').annotate(item_count=Count('category'))
-    return render(request, "auctions/categories.html", {"categories": categories})
+    category_counts = AuctionListing.objects.values('category').annotate(
+        count=Count('category')).order_by()
+    print(category_counts)
+    choices = dict(AuctionListing._meta.get_field('category').flatchoices)
+
+    for entry in category_counts:
+        entry['category'] = force_text(
+            choices[entry['category']], strings_only=True)
+
+    return render(request, "auctions/categories.html", {"categories": category_counts})
 
 
 def category(request, category):
@@ -133,6 +141,7 @@ def category(request, category):
     Return a list of items for the given category
     """
     category_items = AuctionListing.objects.filter(category=category)
+    print(category_items)
     return render(request, "auctions/category.html", {"category": category, "category_items": category_items})
 
 
