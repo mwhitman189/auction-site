@@ -126,12 +126,13 @@ def categories(request):
     """
     category_counts = AuctionListing.objects.values('category').annotate(
         count=Count('category')).order_by()
-    print(category_counts)
+
     choices = dict(AuctionListing._meta.get_field('category').flatchoices)
 
     for entry in category_counts:
-        entry['category'] = force_text(
+        entry['category_abr'] = force_text(
             choices[entry['category']], strings_only=True)
+    print(category_counts)
 
     return render(request, "auctions/categories.html", {"categories": category_counts})
 
