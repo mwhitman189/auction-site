@@ -9,7 +9,14 @@
     {% for listing in listings %}
 
     {% if listing.is_active %}
-    <li><a href="{%url 'auctions:listing' listing.id %}">{{listing}}</a></li>
+        <li>
+            <a href="{%url 'auctions:listing' listing.id %}">
+                <div class="listings-container">
+                    <img class="listings-img" src="{{listing.img}}" />
+                    {{listing}}
+                </div>
+            </a>
+        </li>
     {% endif %}
     
     {% endfor %}

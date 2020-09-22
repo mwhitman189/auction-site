@@ -11,7 +11,7 @@ from .models import User, AuctionListing, Bid, WatchList
 
 
 def index(request):
-    listings = AuctionListing.objects.all()
+    listings = AuctionListing.objects.filter(is_active=True)
 
     return render(request, "auctions/index.html", {"listings": listings})
 
@@ -21,12 +21,15 @@ def listing(request, listing_id):
     Return a listing with the given id
     """
     listing = AuctionListing.objects.get(id=listing_id)
+    is_on_watchlist = WatchList.objects.filter(listing=listing).exists()
+    print(is_on_watchlist)
 
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
     if Bid.objects.filter(listing=listing_id, is_active=True).exists():
-        bid_object = Bid.objects.get(listing=listing_id, is_active=True)
+        bid_object = Bid.objects.get(listing=listing_id)
         current_bid = bid_object.amount
+
     else:
         current_bid = listing.starting_bid
 
@@ -55,19 +58,22 @@ def listing(request, listing_id):
 
                 return render(request, "auctions/listing.html", {
                     "listing": listing,
-                    "current_bid": bid.amount,
+                    "bid": bid.amount,
+                    "is_on_watchlist": is_on_watchlist,
                     "form": NewBidForm()
                 })
         else:
             return render(request, "auctions/listing.html", {
                 "listing": listing,
-                "current_bid": current_bid,
+                "bid": current_bid,
+                "is_on_watchlist": is_on_watchlist,
                 "form": form
             })
 
     return render(request, "auctions/listing.html", {
         "listing": listing,
-        "current_bid": current_bid,
+        "bid": current_bid,
+        "is_on_watchlist": is_on_watchlist,
         "form": NewBidForm()
     })
 
@@ -124,7 +130,7 @@ def categories(request):
     """
     Return a list of item categories
     """
-    category_counts = AuctionListing.objects.values('category').annotate(
+    category_counts = AuctionListing.objects.filter(is_active=True).values('category').annotate(
         count=Count('category')).order_by()
 
     choices = dict(AuctionListing._meta.get_field('category').flatchoices)
@@ -132,7 +138,6 @@ def categories(request):
     for entry in category_counts:
         entry['category_abr'] = force_text(
             choices[entry['category']], strings_only=True)
-    print(category_counts)
 
     return render(request, "auctions/categories.html", {"categories": category_counts})
 
@@ -141,9 +146,17 @@ def category(request, category):
     """
     Return a list of items for the given category
     """
-    category_items = AuctionListing.objects.filter(category=category)
-    print(category_items)
+    category_items = AuctionListing.objects.filter(
+        category=category, is_active=True)
+
     return render(request, "auctions/category.html", {"category": category, "category_items": category_items})
+
+
+def myItems(request):
+    """
+    Return a list of purchased items
+    """
+    purchased_items = Bid.objects.filter(is_winner=True)
 
 
 def login_view(request):

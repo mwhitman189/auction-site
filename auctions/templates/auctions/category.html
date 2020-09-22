@@ -4,7 +4,7 @@
 
 <ul>
     {% for item in category_items %}
-    <li><a href="{%url 'auctions:listing' item.id%}">{{item.item}}</a></li>
+        <li><a href="{%url 'auctions:listing' item.id%}">{{item.item}}</a></li>
     {% endfor %}
 </ul>
 

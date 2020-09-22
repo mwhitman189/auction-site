@@ -3,29 +3,42 @@
 {%block title%}{{listing.item}}{%endblock%}
 
 {% block body %}
-    <h1 class="title">{{listing.item}}</h1>
-    <img src="{{listing.img}}" />
+    <div class="listing">
+        <h2 class="title">{{listing.item}}</h2>
+        <img src="{{listing.img}}" />
+        <div class="info">
+            Description: {{listing.details}}
+        </div>
+    </div>
 
 {% if listing.is_active %}
-    <button class="watchlist-btn" type="submit"
-        onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
-        Add to Watchlist
-    </button>
-    <p class="error">{{error}}</p>
-    <h2 class="heading">Current bid: {{current_bid}}</h2>
-    <form action="{% url 'auctions:listing' listing.id %}" method="POST">
-        {% csrf_token %}
-        {{ form }}
-    </form>
-    <h2>Buyout: {{listing.buyout_price}}</span></h2>
-    <div class="info">
-        Description: {{listing.details}}
+    <div class="bid-interface">
+        {% if is_on_watchlist %}
+            <button id="watchlist-btn" class="watchlisted btn" type="submit"
+                onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
+                Unwatch item
+            </button>
+        {% else %}
+            <button id="watchlist-btn" class="btn" type="submit"
+                onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
+                Watch item
+            </button>
+        {% endif %}
+        <p class="error">{{error}}</p>
+        <h3 class="heading">Current bid: {{current_bid}}</h3>
+        <form action="{% url 'auctions:listing' listing.id %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+        </form>
 
-{% elif bid.winner == user.id %}
-    <h2 class="heading">You have bought {{listing}} for {{bid.amount}}</h2>
+        <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
+    </div>
+
+{% elif bid.bidder.id == user.get_id %}
+    <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
 
 {% else %}
-    <h2 class="heading">This auction is closed</h2>
+    <h3 class="heading">This auction is closed</h3>
 
 {% endif %}
 
