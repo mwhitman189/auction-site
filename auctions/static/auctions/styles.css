@@ -23,6 +23,10 @@ button {
   padding: 1rem;
 }
 
+.nav-link {
+  color: #5f6d7d;
+}
+
 .btn {
   display: inline-block;
   padding: 0 1rem;
@@ -59,6 +63,11 @@ button {
 .listings-img {
   max-width: 400px;
   max-height: 200px;
+}
+
+.listing-img {
+  max-width: 40%;
+  max-height: 40%;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -12,7 +12,7 @@
         <li>
             <a href="{%url 'auctions:listing' listing.id %}">
                 <div class="listings-container">
-                    <img class="listings-img" src="{{listing.img}}" />
+                    <img class="listings-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
                     {{listing}}
                 </div>
             </a>

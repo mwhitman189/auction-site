@@ -5,7 +5,7 @@
 {% block body %}
     <div class="listing">
         <h2 class="title">{{listing.item}}</h2>
-        <img src="{{listing.img}}" />
+        <img class="listing-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
         <div class="info">
             Description: {{listing.details}}
         </div>
