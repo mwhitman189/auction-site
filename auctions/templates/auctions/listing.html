@@ -3,43 +3,71 @@
 {%block title%}{{listing.item}}{%endblock%}
 
 {% block body %}
-    <div class="listing">
-        <h2 class="title">{{listing.item}}</h2>
-        <img class="listing-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
-        <div class="info">
-            Description: {{listing.details}}
+    <h2 class="title">{{listing.item}}</h2>
+    <p class="error">{{error}}</p>
+    <section class="listing">
+        <div class="listing">
+            <img class="listing-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
+            <div class="info">
+                Description: {{listing.details}}
+            </div>
         </div>
-    </div>
 
 {% if listing.is_active %}
-    <div class="bid-interface">
-        {% if is_on_watchlist %}
-            <button id="watchlist-btn" class="watchlisted btn" type="submit"
-                onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
-                Unwatch item
-            </button>
-        {% else %}
-            <button id="watchlist-btn" class="btn" type="submit"
-                onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
-                Watch item
-            </button>
-        {% endif %}
-        <p class="error">{{error}}</p>
-        <h3 class="heading">Current bid: {{current_bid}}</h3>
-        <form action="{% url 'auctions:listing' listing.id %}" method="POST">
-            {% csrf_token %}
-            {{ form }}
-        </form>
+        <div class="bid-interface">
+            <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
+            <h3 class="heading">Current bid: {{bid}}</h3>
+            {% if is_on_watchlist %}
+                <button id="watchlist-btn" class="watchlisted btn" type="submit"
+                    onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
+                    Unwatch item
+                </button>
+            {% else %}
+                <button id="watchlist-btn" class="btn" type="submit"
+                    onclick="location.href='{% url 'auctions:watchlist_toggle' listing.id %}'">
+                    Watch item
+                </button>
+            {% endif %}
 
-        <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
-    </div>
+            {% if listing.seller.id == user.id %}
+            
+            <form action="{% url 'auctions:listing_closeout' listing.id %}" method="POST">
+                {% csrf_token %}
 
-{% elif bid.bidder.id == user.get_id %}
-    <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
+                <button id="auction-btn" class=" auction-btn btn" type="submit">Closeout</button>
+            </form>
 
-{% else %}
-    <h3 class="heading">This auction is closed</h3>
+            {% else %}
+            <form action="{% url 'auctions:listing' listing.id %}" method="POST">
+                {% csrf_token %}
+                {{ form }}
 
+                <button id="auction-btn" class=" auction-btn btn" type="submit">Bid</button>
+            </form>
+            {% endif %}
+        </div>
+
+    {% elif bid.bidder.id == user.id %}
+        <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
+
+    {% else %}
+        <h3 class="heading">This auction is closed</h3>
 {% endif %}
+    </section>
+
+    <section class="comments">
+        <h2 class="sub-title">Comments</h2>
+        {% for comment in comments %}
+        <div class="comment-container">
+            <div class="flex-container">
+                <div style="background-image: url({{comment.commentor.avatar}})" class="avatar-img"></div>
+                <div class="user-details">
+                {{comment.commentator.username}}
+                </div>
+            </div>
+            <p class="comment">{{comment.comment}}</p>
+        </div>
+        {% endfor %}
+    </section>
 
 {% endblock %}

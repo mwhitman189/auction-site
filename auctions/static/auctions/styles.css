@@ -23,6 +23,11 @@ button {
   padding: 1rem;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .nav-link {
   color: #5f6d7d;
 }
@@ -33,11 +38,12 @@ button {
   color: #fff;
   font-weight: 600;
   background-color: rgba(112, 66, 139, 0.7);
-  min-width: 64px;
+  min-width: 120px;
   line-height: 32px;
   height: 32px;
   border-radius: 5px;
   text-align: center;
+  margin: 0.5rem 0;
 }
 .btn:hover {
   color: #fff;
@@ -60,6 +66,15 @@ button {
   border-top: 1px solid rgba(161, 170, 179, 0.7);
 }
 
+.avatar-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
 .listings-img {
   max-width: 400px;
   max-height: 200px;
@@ -68,6 +83,10 @@ button {
 .listing-img {
   max-width: 40%;
   max-height: 40%;
+}
+
+.error {
+  color: red;
 }
 
 /*# sourceMappingURL=styles.css.map */

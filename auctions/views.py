@@ -7,7 +7,7 @@ from django.utils.encoding import force_text
 from django.db.models import Count, CharField, When, Value, Case
 
 from .forms import NewListingForm, NewBidForm
-from .models import User, AuctionListing, Bid, WatchList
+from .models import User, AuctionListing, Bid, WatchList, Comment
 
 
 def index(request):
@@ -22,7 +22,7 @@ def listing(request, listing_id):
     """
     listing = AuctionListing.objects.get(id=listing_id)
     is_on_watchlist = WatchList.objects.filter(listing=listing).exists()
-    print(is_on_watchlist)
+    comments = Comment.objects.all()
 
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
@@ -35,6 +35,10 @@ def listing(request, listing_id):
 
     if request.method == "POST":
         form = NewBidForm(request.POST)
+        if not Bid.objects.filter(listing=listing_id, is_active=True).exists():
+            bid_object = form.save(commit=False)
+            bid_object.listing = listing
+            bid_object.bidder = request.user
 
         if form.is_valid():
             # If the current existing bid is greater than the input amount, return an error
@@ -42,6 +46,7 @@ def listing(request, listing_id):
                 return render(request, "auctions/listing.html", {
                     "listing": listing,
                     "current_bid": current_bid,
+                    "comments": comments,
                     "form": form,
                     "error": "Bid must be higher than current bid"
                 })
@@ -59,6 +64,7 @@ def listing(request, listing_id):
                 return render(request, "auctions/listing.html", {
                     "listing": listing,
                     "bid": bid.amount,
+                    "comments": comments,
                     "is_on_watchlist": is_on_watchlist,
                     "form": NewBidForm()
                 })
@@ -66,6 +72,7 @@ def listing(request, listing_id):
             return render(request, "auctions/listing.html", {
                 "listing": listing,
                 "bid": current_bid,
+                "comments": comments,
                 "is_on_watchlist": is_on_watchlist,
                 "form": form
             })
@@ -73,9 +80,28 @@ def listing(request, listing_id):
     return render(request, "auctions/listing.html", {
         "listing": listing,
         "bid": current_bid,
+        "comments": comments,
         "is_on_watchlist": is_on_watchlist,
         "form": NewBidForm()
     })
+
+
+def listing_closeout(request, listing_id):
+    """
+    Close out the auction if the user is the item seller
+    """
+    listing = AuctionListing.objects.get(id=listing_id)
+
+    try:
+        highest_bid = Bid.objects.get(listing=listing, is_active=True)
+    except Bid.DoesNotExist:
+        highest_bid = None
+
+    if request.user.id == listing.seller.id:
+        listing.is_active = False
+        highest_bid.is_winner = True
+        highest_bid.is_active = False
+    return False
 
 
 def new_listing(request):

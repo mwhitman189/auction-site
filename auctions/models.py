@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.utils import timezone
+from django.conf import settings
 
 
 def return_exp_datetime():
@@ -10,7 +11,7 @@ def return_exp_datetime():
 
 
 class User(AbstractUser):
-    avatar = models.BinaryField(blank=True)
+    avatar = models.URLField(blank=True, max_length=400)
 
     def __str__(self):
         return self.username
@@ -18,9 +19,9 @@ class User(AbstractUser):
 
 class Rating(models.Model):
     evaluator = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="evaluator")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="evaluator")
     seller = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="seller")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="seller")
     rating = models.DecimalField(
         validators=[MaxValueValidator(5)], max_digits=2, decimal_places=1)
 
@@ -67,11 +68,11 @@ class AuctionListing(models.Model):
     starting_bid = models.DecimalField(max_digits=13, decimal_places=2)
     buyout_price = models.DecimalField(max_digits=13, decimal_places=2)
     details = models.TextField(max_length=400)
-    img = models.URLField(blank=True)
+    img = models.URLField(blank=True, max_length=400)
     expiration = models.DateTimeField(default=return_exp_datetime)
     is_active = models.BooleanField(default=True)
     seller = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.item
@@ -79,7 +80,7 @@ class AuctionListing(models.Model):
 
 class WatchList(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="watchlist")
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="watchlist")
     listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE)
 
@@ -89,7 +90,7 @@ class WatchList(models.Model):
 
 class Bid(models.Model):
     bidder = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=13, decimal_places=2)
@@ -103,7 +104,7 @@ class Bid(models.Model):
 
 class Comment(models.Model):
     commentor = models.ForeignKey(
-        User, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     listing = models.ForeignKey(
         AuctionListing, on_delete=models.CASCADE)
     comment = models.TextField(max_length=150)
