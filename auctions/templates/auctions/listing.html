@@ -28,18 +28,12 @@
                     Watch item
                 </button>
             {% endif %}
-
+            <form action="{% url 'auctions:listing' listing.id %}" method="POST">
             {% if listing.seller.id == user.id %}
-            
-            <form action="{% url 'auctions:listing_closeout' listing.id %}" method="POST">
                 {% csrf_token %}
-
-                <button id="auction-btn" class=" auction-btn btn" type="submit">Closeout</button>
-            </form>
+                <button id="auction-btn" formaction="{% url 'auctions:listing_closeout' listing.id %}" class=" auction-btn btn" type="submit">Closeout</button>
 
             {% else %}
-            <form action="{% url 'auctions:listing' listing.id %}" method="POST">
-                {% csrf_token %}
                 {{ form }}
 
                 <button id="auction-btn" class=" auction-btn btn" type="submit">Bid</button>

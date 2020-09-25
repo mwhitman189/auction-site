@@ -9,7 +9,13 @@
     {% if watchlist %}
         {% for item in watchlist %}
             <li class="list-item">
-                <a href="{% url 'auctions:listing' item.listing.id %}">{{item}}</a>
+                <a href="{% url 'auctions:listing' item.listing.id %}">
+                    <div class="listings-container">
+                        <img class="listings-img" src="{{item.listing.img}}" alt="{{item.listing.item}}" loading="lazy" />
+                        {{item}}
+                        <button class="remove-btn btn" onclick="location.href='{% url 'auctions:watchlist_toggle' item.listing.id %}'">Remove</button>
+                    </div>
+                </a>
             </li>
         {% endfor %}
     {% else %}

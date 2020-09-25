@@ -4,6 +4,29 @@ $base-text-color: #5f6d7d;
 $soft-text-color: #a1aab3;
 $light-text-color: #fff;
 
+@keyframes disappear {
+    0% {
+        transform: translateX(0);
+        height: 100%;
+        line-height: 100%;
+        padding: 5px;
+    }
+
+    75% {
+        transform: translateX(100vw);
+        height: 100%;
+        line-height: 100%;
+        padding: 5px;
+    }
+
+    100% {
+        transform: translateX(100vw);
+        height: 0;
+        line-height: 0;
+        padding: 0;
+    }
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -61,7 +84,12 @@ button {
     }
 }
 
+.remove-btn {
+    z-index: 2;
+}
+
 .listings-container {
+    background-color: rgba($soft-text-color, .1);
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
