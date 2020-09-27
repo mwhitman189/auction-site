@@ -88,6 +88,7 @@ def listing(request, listing_id):
     })
 
 
+@login_required
 def listing_closeout(request, listing_id):
     """
     Close out the auction if the user is the item seller
@@ -108,6 +109,7 @@ def listing_closeout(request, listing_id):
     return False
 
 
+@login_required
 def new_listing(request):
     """
     Return a form to create a new listing
@@ -129,6 +131,7 @@ def new_listing(request):
         return render(request, 'auctions/new_listing.html', {'form': NewListingForm()})
 
 
+@login_required
 def watchlist(request):
     """
     Return the user's watchlist
@@ -138,6 +141,7 @@ def watchlist(request):
     return render(request, 'auctions/watchlist.html', {'watchlist': watchlist})
 
 
+@login_required
 def watchlist_toggle(request, listing_id):
     """
     Add listing to user's watchlist
@@ -181,6 +185,8 @@ def category(request, category):
     return render(request, 'auctions/category.html', {'category': category, 'category_items': category_items})
 
 
+# TODO:
+@login_required
 def myItems(request):
     """
     Return a list of purchased items
