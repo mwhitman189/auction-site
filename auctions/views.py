@@ -150,10 +150,9 @@ def watchlist_toggle(request, listing_id):
         watchlist_item.delete()
     else:
         watchlist_item = WatchList(user=user, listing=listing)
-
         watchlist_item.save()
 
-    return HttpResponseRedirect(reverse('auctions:listing', args={listing_id}))
+    return HttpResponseRedirect(reverse('auctions:watchlist'))
 
 
 def categories(request):

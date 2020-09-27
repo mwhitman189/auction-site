@@ -1,21 +1,21 @@
 @keyframes disappear {
   0% {
     transform: translateX(0);
-    height: 100%;
+    height: 260px;
     line-height: 100%;
     padding: 5px;
   }
   75% {
     transform: translateX(100vw);
-    height: 100%;
+    height: 260px;
     line-height: 100%;
     padding: 5px;
   }
   100% {
     transform: translateX(100vw);
-    height: 0;
-    line-height: 0;
-    padding: 0;
+    height: 0px;
+    line-height: 0px;
+    padding: 0px;
   }
 }
 body {
@@ -32,9 +32,29 @@ ul {
 }
 
 button {
-  border: none;
-  padding: 0;
+  font-family: inherit;
+  /* For all browsers */
+  font-size: 100%;
+  /* For all browsers */
+  line-height: 1.15;
+  /* For all browsers */
   margin: 0;
+  /* Firefox and Safari have margin */
+  overflow: visible;
+  /* Edge hides overflow */
+  text-transform: none;
+  /* Firefox inherits text-transform */
+  -webkit-appearance: button;
+  /* Safari otherwise prevents some styles */
+}
+
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring {
+  outline: 1px dotted ButtonText;
 }
 
 .wrapper {
@@ -86,6 +106,10 @@ button {
   width: 100%;
   height: 260px;
   border-bottom: 1px solid rgba(161, 170, 179, 0.7);
+  animation-name: disappear;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
 }
 .listings-container:first-child {
   border-top: 1px solid rgba(161, 170, 179, 0.7);

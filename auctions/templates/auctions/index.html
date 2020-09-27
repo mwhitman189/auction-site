@@ -10,12 +10,12 @@
 
     {% if listing.is_active %}
         <li>
-            <a href="{%url 'auctions:listing' listing.id %}">
-                <div class="listings-container">
+            <div class="listings-container">
+                <a href="{%url 'auctions:listing' listing.id %}">
                     <img class="listings-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
                     {{listing}}
-                </div>
-            </a>
+                </a>
+            </div>
         </li>
     {% endif %}
     
