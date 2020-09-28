@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -157,6 +158,14 @@ def watchlist_toggle(request, listing_id):
         watchlist_item.save()
 
     return HttpResponseRedirect(reverse('auctions:watchlist'))
+
+
+@login_required
+def purchases(request):
+    user = request.user
+    purchases = Bid.objects.filter(bidder=user, is_winner=True)
+
+    return render(request, 'auctions/purchases.html', {'purchases': purchases})
 
 
 def categories(request):
