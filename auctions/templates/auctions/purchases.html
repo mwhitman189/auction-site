@@ -1,0 +1,21 @@
+{% extends 'auctions/layout.html' %}
+
+{%block title%}{{user.username}}'s Purchases{%endblock%}
+
+{% block body %}
+<h2 class="title">{{listing.item}}</h2>
+<p class="error">{{error}}</p>
+<section class="items">
+<ul>
+    {% for purchase in purchases %}
+    <li>
+        <div class="listings-container">
+            <a href="{%url 'auctions:listing' purchase.listing.id %}">
+                <img class="listings-img" src="{{purchase.listing.img}}" alt="{{purchase.listing.item}}" loading="lazy" />
+                You won <span class="bold">{{purchase.listing.item}}</span> with a bid of <span class="bold">{{purchase.amount}}</span>
+            </a>
+        </div>
+    </li>    
+    {% endfor %}
+</ul>
+{% endblock %}

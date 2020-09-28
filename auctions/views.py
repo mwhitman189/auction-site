@@ -160,6 +160,14 @@ def watchlist_toggle(request, listing_id):
     return HttpResponseRedirect(reverse('auctions:listing', args={listing.id}))
 
 
+@login_required
+def purchases(request):
+    user = request.user
+    purchases = Bid.objects.filter(bidder=user, is_winner=True)
+
+    return render(request, 'auctions/purchases.html', {'purchases': purchases})
+
+
 def categories(request):
     """
     Return a list of item categories
