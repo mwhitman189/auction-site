@@ -10,10 +10,23 @@ document.addEventListener('DOMContentLoaded', function () {
             })
         }
     })
+
+    watchlistToggleBtn = document.getElementById('watchlist-btn')
+    watchlistToggleBtn.addEventListener('click', () => {
+        toggleWatchlistItem(watchlistToggleBtn.dataset.listing_id)
+        if (watchlistToggleBtn.classList.contains('watchlisted')) {
+            watchlistToggleBtn.innerHTML = "Watch item"
+            watchlistToggleBtn.classList.remove('watchlisted')
+        } else {
+            watchlistToggleBtn.innerHTML = "Unwatch item"
+            watchlistToggleBtn.classList.add('watchlisted')
+        }
+        watchlistToggleBtn.innerHTML('')
+    })
 })
 
 function toggleWatchlistItem(item_id) {
-    fetch(`watchlist/toggle/${item_id}`)
+    fetch(`http://localhost:8000/watchlist/toggle/${item_id}`)
         .then(res => console.log(res))
         .catch(err => console.log(err))
 }
