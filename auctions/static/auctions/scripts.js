@@ -12,17 +12,28 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     watchlistToggleBtn = document.getElementById('watchlist-btn')
-    watchlistToggleBtn.addEventListener('click', () => {
-        toggleWatchlistItem(watchlistToggleBtn.dataset.listing_id)
-        if (watchlistToggleBtn.classList.contains('watchlisted')) {
-            watchlistToggleBtn.innerHTML = "Watch item"
-            watchlistToggleBtn.classList.remove('watchlisted')
-        } else {
-            watchlistToggleBtn.innerHTML = "Unwatch item"
-            watchlistToggleBtn.classList.add('watchlisted')
-        }
-        watchlistToggleBtn.innerHTML('')
-    })
+    if (watchlistToggleBtn) {
+        watchlistToggleBtn.addEventListener('click', () => {
+            toggleWatchlistItem(watchlistToggleBtn.dataset.listing_id)
+            if (watchlistToggleBtn.classList.contains('watchlisted')) {
+                watchlistToggleBtn.innerHTML = "Watch item"
+                watchlistToggleBtn.classList.remove('watchlisted')
+            } else {
+                watchlistToggleBtn.innerHTML = "Unwatch item"
+                watchlistToggleBtn.classList.add('watchlisted')
+            }
+        })
+    }
+
+    bidInput = document.getElementById('id_amount')
+    auctionBtn = document.getElementById('auction-btn')
+    if (auctionBtn.dataset.auth_status === true) {
+        auctionBtn.disabled = false
+        bidInput.disabled = false
+    } else {
+        auctionBtn.disabled = true
+        bidInput.disabled = true
+    }
 })
 
 function toggleWatchlistItem(item_id) {

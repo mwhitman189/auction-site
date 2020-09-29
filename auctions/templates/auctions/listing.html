@@ -13,46 +13,60 @@
             </div>
         </div>
 
-{% if listing.is_active %}
-        <div class="bid-interface">
-            {% if is_on_watchlist %}
-                <button id="watchlist-btn"
-                    class="watchlisted btn"
-                    type="button"
-                    data-listing_id="{{listing.id}}"
-                >
-                    Unwatch item
-                </button>
-            {% else %}
-                <button id="watchlist-btn" 
-                    class="btn" 
-                    type="button" 
-                    data-listing_id="{{listing.id}}"
-                >
-                    Watch item
-                </button>
-            {% endif %}
-            <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
-            <h3 class="heading">Current bid: {{bid}}</h3>
-            <form action="{% url 'auctions:listing' listing.id %}" method="POST">
-            {% if listing.seller.id == user.id %}
-                {% csrf_token %}
-                <button id="auction-btn" formaction="{% url 'auctions:listing_closeout' listing.id %}" class=" auction-btn btn" type="submit">Closeout</button>
+        {% if listing.is_active %}
+            <div class="bid-interface">
+                {% if user.is_authenticated %}
+                    {% if is_on_watchlist %}
+                        <button id="watchlist-btn"
+                            class="watchlisted btn"
+                            type="button"
+                            data-listing_id="{{listing.id}}"
+                        >
+                            Unwatch item
+                        </button>
+                    {% else %}
+                        <button id="watchlist-btn" 
+                            class="btn" 
+                            type="button" 
+                            data-listing_id="{{listing.id}}"
+                        >
+                            Watch item
+                        </button>
+                    {% endif %}
+                {% endif %}
+                <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
+                <h3 class="heading">Current bid: {{bid}}</h3>
+                
+                <form action="{% url 'auctions:listing' listing.id %}" method="POST">
+                    {% csrf_token %}
+                {% if listing.seller.id == user.id %}
+                    <button id="auction-btn"
+                        formaction="{% url 'auctions:listing_closeout' listing.id %}"
+                        class="auction-btn btn"
+                        type="submit"
+                    >
+                        Closeout
+                    </button>
+
+                {% else %}
+                    {{ form }}
+                    <button id="auction-btn"
+                        class=" auction-btn btn"
+                        data-auth_status="{{user.is_authenticated}}"
+                        type="submit"
+                    >
+                        Bid
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+
+            {% elif bid.bidder.id == user.id %}
+                <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
 
             {% else %}
-                {{ form }}
-
-                <button id="auction-btn" class=" auction-btn btn" type="submit">Bid</button>
-            </form>
-            {% endif %}
-        </div>
-
-    {% elif bid.bidder.id == user.id %}
-        <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
-
-    {% else %}
-        <h3 class="heading">This auction is closed</h3>
-{% endif %}
+                <h3 class="heading">This auction is closed</h3>
+        {% endif %}
     </section>
 
     <section class="comments">

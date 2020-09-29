@@ -23,7 +23,12 @@ def listing(request, listing_id):
     Return a listing with the given id
     """
     listing = AuctionListing.objects.get(id=listing_id)
-    is_on_watchlist = WatchList.objects.filter(listing=listing).exists()
+    if request.user.is_authenticated:
+        is_on_watchlist = WatchList.objects.filter(
+            user=request.user, listing=listing).exists()
+    else:
+        is_on_watchlist = False
+
     comments = Comment.objects.filter(listing=listing)
 
     # Check for existing bids. If none are present, set the current bid to
