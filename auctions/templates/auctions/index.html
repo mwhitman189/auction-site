@@ -13,7 +13,7 @@
             <div class="listings-container">
                 <a href="{%url 'auctions:listing' listing.id %}">
                     <img class="listings-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
-                    {{listing}}
+                    {{listing}} Buyout price: {{listing.buyout_price}}
                 </a>
             </div>
         </li>

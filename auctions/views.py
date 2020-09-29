@@ -5,8 +5,8 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.utils.encoding import force_text
 from django.db.models import Count, CharField, When, Value, Case
+from .helpers import getFullText
 
 from .forms import NewListingForm, NewBidForm
 from .models import User, AuctionListing, Bid, WatchList, Comment
@@ -24,7 +24,7 @@ def listing(request, listing_id):
     """
     listing = AuctionListing.objects.get(id=listing_id)
     is_on_watchlist = WatchList.objects.filter(listing=listing).exists()
-    comments = Comment.objects.all()
+    comments = Comment.objects.filter(listing=listing)
 
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
@@ -49,7 +49,7 @@ def listing(request, listing_id):
                     request, "Your bid must be higher than the current bid")
                 return render(request, 'auctions/listing.html', {
                     'listing': listing,
-                    'current_bid': current_bid,
+                    'bid': current_bid,
                     'comments': comments,
                     'form': form
                 })
@@ -105,7 +105,8 @@ def listing_closeout(request, listing_id):
 
     except Bid.DoesNotExist:
         messages.error(request, "There are no bids on this item")
-        return HttpResponseRedirect(reverse('auctions:listing', args={listing_id}))
+        listing.delete()
+        return HttpResponseRedirect(reverse('auctions:index'))
 
     return False
 
@@ -175,13 +176,9 @@ def categories(request):
     category_counts = AuctionListing.objects.filter(is_active=True).values('category').annotate(
         count=Count('category')).order_by()
 
-    choices = dict(AuctionListing._meta.get_field('category').flatchoices)
+    categories_full = getFullText(category_counts)
 
-    for entry in category_counts:
-        entry['category_abr'] = force_text(
-            choices[entry['category']], strings_only=True)
-
-    return render(request, 'auctions/categories.html', {'categories': category_counts})
+    return render(request, 'auctions/categories.html', {'categories': categories_full})
 
 
 def category(request, category):
@@ -191,7 +188,9 @@ def category(request, category):
     category_items = AuctionListing.objects.filter(
         category=category, is_active=True)
 
-    return render(request, 'auctions/category.html', {'category': category, 'category_items': category_items})
+    category_full = getFullText(category)
+
+    return render(request, 'auctions/category.html', {'category_full': category_full, 'category_items': category_items})
 
 
 # TODO:

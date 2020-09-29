@@ -32,16 +32,23 @@
           </a>
         </li>
 
-        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'auctions:categories' %}">
           Categories
           </a>
         </li>
+
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'auctions:watchlist' %}">
           My Watchlist
           </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'auctions:purchases' %}">My Purchases</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'auctions:new_listing' %}">Create New Listing</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'auctions:logout' %}">Log Out</a>
