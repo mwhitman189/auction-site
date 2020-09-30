@@ -42,9 +42,8 @@ def listing(request, listing_id):
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
     if Bid.objects.filter(listing=listing_id, is_active=True).exists():
-        bid_object = Bid.objects.get(listing=listing_id)
+        bid_object = Bid.objects.get(listing=listing_id, is_active=True)
         current_bid = bid_object.amount
-
     else:
         current_bid = listing.starting_bid
 
@@ -75,6 +74,7 @@ def listing(request, listing_id):
                 bid = form.save(commit=False)
                 bid.listing = listing
                 bid.bidder = request.user
+                bid.is_active = True
                 bid.save()
 
                 return render(request, 'auctions/listing.html', {
@@ -115,16 +115,17 @@ def listing_closeout(request, listing_id):
             listing.is_active = False
             highest_bid.is_winner = True
             highest_bid.is_active = False
+            listing.save()
+            highest_bid.save()
+        return HttpResponseRedirect(reverse('auctions:listing', args={listing.id}))
 
     except Bid.DoesNotExist:
         messages.error(request, "There are no bids on this item")
         listing.delete()
         return HttpResponseRedirect(reverse('auctions:index'))
 
-    return False
 
-
-@login_required
+@ login_required
 def new_listing(request):
     """
     Return a form to create a new listing
@@ -146,7 +147,7 @@ def new_listing(request):
         return render(request, 'auctions/new_listing.html', {'form': NewListingForm()})
 
 
-@login_required
+@ login_required
 def watchlist(request):
     """
     Return the user's watchlist
@@ -156,7 +157,7 @@ def watchlist(request):
     return render(request, 'auctions/watchlist.html', {'watchlist': watchlist})
 
 
-@login_required
+@ login_required
 def watchlist_toggle(request, listing_id):
     """
     Add listing to user's watchlist
@@ -174,7 +175,7 @@ def watchlist_toggle(request, listing_id):
     return HttpResponseRedirect(reverse('auctions:listing', args={listing.id}))
 
 
-@login_required
+@ login_required
 def purchases(request):
     user = request.user
     purchases = Bid.objects.filter(bidder=user, is_winner=True)
@@ -207,7 +208,7 @@ def category(request, category):
 
 
 # TODO:
-@login_required
+@ login_required
 def myItems(request):
     """
     Return a list of purchased items

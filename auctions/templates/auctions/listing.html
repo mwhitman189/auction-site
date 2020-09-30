@@ -37,27 +37,32 @@
                 <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
                 <h3 class="heading">Current bid: {{bid}}</h3>
                 
-                <form action="{% url 'auctions:listing' listing.id %}" method="POST">
-                    {% csrf_token %}
                 {% if listing.seller.id == user.id %}
-                    <button id="auction-btn"
-                        formaction="{% url 'auctions:listing_closeout' listing.id %}"
-                        class="auction-btn btn"
-                        type="submit"
-                    >
-                        Closeout
-                    </button>
-
+                    {% if listing.is_active %}
+                        <form action="{% url 'auctions:listing_closeout' listing.id %}" method="POST">
+                            {% csrf_token %}
+                            <button id="closeout-btn"
+                                action="{% url 'auctions:listing_closeout' listing.id %}"
+                                class="auction-btn btn"
+                                type="submit"
+                            >
+                                Closeout
+                            </button>
+                        </form>
+                    {% endif %}
                 {% else %}
-                    {{ form }}
-                    <button id="auction-btn"
-                        class=" auction-btn btn"
-                        data-auth_status="{{user.is_authenticated}}"
-                        type="submit"
-                    >
-                        Bid
-                    </button>
-                </form>
+                    <form action="{% url 'auctions:listing' listing.id %}" method="POST">
+                        {% csrf_token %}
+
+                        {{ form }}
+                        <button id="auction-btn"
+                            class=" auction-btn btn"
+                            data-auth_status="{{user.is_authenticated}}"
+                            type="submit"
+                        >
+                            Bid
+                        </button>
+                    </form>
                 {% endif %}
             </div>
 
