@@ -14,8 +14,17 @@ from .models import User, AuctionListing, Bid, WatchList, Comment
 
 def index(request):
     listings = AuctionListing.objects.filter(is_active=True)
+    listings_with_bids = []
+    for listing in listings:
+        bid = listing.bid_set.filter(is_active=True).only('id').first()
+        print(bid)
+        if bid is None:
+            bid = listing.starting_bid
+        else:
+            bid = bid.amount
+        listings_with_bids.append({"listing": listing, "bid": bid})
 
-    return render(request, 'auctions/index.html', {'listings': listings})
+    return render(request, 'auctions/index.html', {'listings_with_bids': listings_with_bids})
 
 
 def listing(request, listing_id):

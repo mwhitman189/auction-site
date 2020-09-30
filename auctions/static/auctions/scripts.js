@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     bidInput = document.getElementById('id_amount')
     auctionBtn = document.getElementById('auction-btn')
-    if (auctionBtn.dataset.auth_status === true) {
+    console.log(auctionBtn.dataset.auth_status)
+    if (auctionBtn.dataset.auth_status === "True") {
         auctionBtn.disabled = false
         bidInput.disabled = false
     } else {

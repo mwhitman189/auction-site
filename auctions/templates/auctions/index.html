@@ -6,14 +6,14 @@
 <h2>Active Listings</h2>
 
 <ul>
-    {% for listing in listings %}
+    {% for listing in listings_with_bids %}
 
-    {% if listing.is_active %}
+    {% if listing.listing.is_active %}
         <li>
             <div class="listings-container">
-                <a href="{%url 'auctions:listing' listing.id %}">
-                    <img class="listings-img" src="{{listing.img}}" alt="{{listing.item}}" loading="lazy" />
-                    {{listing}} Buyout price: {{listing.buyout_price}}
+                <a href="{%url 'auctions:listing' listing.listing.id %}">
+                    <img class="listings-img" src="{{listing.listing.img}}" alt="{{listing.listing.item}}" loading="lazy" />
+                    {{listing.listing}} Buyout price: {{listing.bid}}
                 </a>
             </div>
         </li>
