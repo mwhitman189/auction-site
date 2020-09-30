@@ -11,11 +11,13 @@
     {% if listing.listing.is_active %}
         <li>
             <div class="listings-container">
-                <a href="{%url 'auctions:listing' listing.listing.id %}">
+                <a class="flex-container" href="{%url 'auctions:listing' listing.listing.id %}">
                     <img class="listings-img" src="{{listing.listing.img}}" alt="{{listing.listing.item}}" loading="lazy" />
                 </a>
                 <div class="column-flex-container">
-                    <h3 class="item-title">{{listing.listing}}</h3>
+                    <a class="flex-container" href="{%url 'auctions:listing' listing.listing.id %}">
+                        <h3 class="item-title">{{listing.listing}}</h3>
+                    </a>
                     <p class="current-price">Current Price: {{listing.bid}}</p>
                     <details>{{listing.listing.details}}</details>
                 </div>

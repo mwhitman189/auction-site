@@ -17,7 +17,6 @@ def index(request):
     listings_with_bids = []
     for listing in listings:
         bid = listing.bid_set.filter(is_active=True).only('id').first()
-        print(bid)
         if bid is None:
             bid = listing.starting_bid
         else:
