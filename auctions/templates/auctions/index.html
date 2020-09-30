@@ -13,8 +13,12 @@
             <div class="listings-container">
                 <a href="{%url 'auctions:listing' listing.listing.id %}">
                     <img class="listings-img" src="{{listing.listing.img}}" alt="{{listing.listing.item}}" loading="lazy" />
-                    {{listing.listing}} Buyout price: {{listing.bid}}
                 </a>
+                <div class="column-flex-container">
+                    <h3 class="item-title">{{listing.listing}}</h3>
+                    <p class="current-price">Current Price: {{listing.bid}}</p>
+                    <details>{{listing.listing.details}}</details>
+                </div>
             </div>
         </li>
     {% endif %}
