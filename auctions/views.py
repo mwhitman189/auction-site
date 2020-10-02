@@ -42,7 +42,7 @@ def listing(request, listing_id):
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
     if Bid.objects.filter(listing=listing_id, is_active=True).exists():
-        bid_object = Bid.objects.get(
+        bid_object = Bid.objects.filter(
             listing=listing_id, is_active=True).first()
         current_bid = bid_object.amount
     elif Bid.objects.filter(listing=listing_id, is_winner=True).exists():
@@ -67,7 +67,8 @@ def listing(request, listing_id):
                     request, "Your bid must be higher than the current bid")
                 return render(request, 'auctions/listing.html', {
                     'listing': listing,
-                    'bid': current_bid,
+                    'bid': bid_object,
+                    'bid_amount': current_bid,
                     'comments': comments,
                     'form': form
                 })
@@ -86,6 +87,7 @@ def listing(request, listing_id):
                 return render(request, 'auctions/listing.html', {
                     'listing': listing,
                     'bid': bid_object,
+                    'bid_amount': current_bid,
                     'comments': comments,
                     'is_on_watchlist': is_on_watchlist,
                     'form': NewBidForm()
@@ -94,6 +96,7 @@ def listing(request, listing_id):
             return render(request, 'auctions/listing.html', {
                 'listing': listing,
                 'bid': bid_object,
+                'bid_amount': current_bid,
                 'comments': comments,
                 'is_on_watchlist': is_on_watchlist,
                 'form': form
@@ -102,6 +105,7 @@ def listing(request, listing_id):
     return render(request, 'auctions/listing.html', {
         'listing': listing,
         'bid': bid_object,
+        'bid_amount': current_bid,
         'comments': comments,
         'is_on_watchlist': is_on_watchlist,
         'form': NewBidForm()
