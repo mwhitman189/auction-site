@@ -50,6 +50,7 @@ def listing(request, listing_id):
             listing=listing_id, is_winner=True).first()
         current_bid = bid_object.amount
     else:
+        bid_object = None
         current_bid = listing.starting_bid
 
     if request.method == 'POST':
