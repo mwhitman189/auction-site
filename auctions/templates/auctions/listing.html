@@ -35,7 +35,7 @@
                     {% endif %}
                 {% endif %}
                 <h3>Buyout: <span class="buyout">{{listing.buyout_price}}</span></h3>
-                <h3 class="heading">Current bid: {{bid}}</h3>
+                <h3 class="heading">Current bid: {{bid.amount}}</h3>
                 
                 {% if listing.seller.id == user.id %}
                     {% if listing.is_active %}
@@ -67,7 +67,7 @@
             </div>
 
             {% elif bid.bidder.id == user.id %}
-                <h3 class="heading">You have bought {{listing}} for {{bid}}</h3>
+                <h3 class="heading">You won the auction of {{listing}} for {{bid.amount}}!</h3>
 
             {% else %}
                 <h3 class="heading">This auction is closed</h3>

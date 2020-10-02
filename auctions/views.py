@@ -42,7 +42,12 @@ def listing(request, listing_id):
     # Check for existing bids. If none are present, set the current bid to
     # the listing starting_bid
     if Bid.objects.filter(listing=listing_id, is_active=True).exists():
-        bid_object = Bid.objects.get(listing=listing_id, is_active=True)
+        bid_object = Bid.objects.get(
+            listing=listing_id, is_active=True).first()
+        current_bid = bid_object.amount
+    elif Bid.objects.filter(listing=listing_id, is_winner=True).exists():
+        bid_object = Bid.objects.filter(
+            listing=listing_id, is_winner=True).first()
         current_bid = bid_object.amount
     else:
         current_bid = listing.starting_bid
@@ -79,7 +84,7 @@ def listing(request, listing_id):
 
                 return render(request, 'auctions/listing.html', {
                     'listing': listing,
-                    'bid': bid.amount,
+                    'bid': bid_object,
                     'comments': comments,
                     'is_on_watchlist': is_on_watchlist,
                     'form': NewBidForm()
@@ -87,7 +92,7 @@ def listing(request, listing_id):
         else:
             return render(request, 'auctions/listing.html', {
                 'listing': listing,
-                'bid': current_bid,
+                'bid': bid_object,
                 'comments': comments,
                 'is_on_watchlist': is_on_watchlist,
                 'form': form
@@ -95,7 +100,7 @@ def listing(request, listing_id):
 
     return render(request, 'auctions/listing.html', {
         'listing': listing,
-        'bid': current_bid,
+        'bid': bid_object,
         'comments': comments,
         'is_on_watchlist': is_on_watchlist,
         'form': NewBidForm()
