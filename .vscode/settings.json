@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "/home/miles/webdev/cs50-py-ja/env/bin/python",
+  "python.pythonPath": "/usr/bin/python3",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true
 }

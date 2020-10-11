@@ -30,7 +30,11 @@ def listing(request, listing_id):
     """
     Return a listing with the given id
     """
-    listing = AuctionListing.objects.get(id=listing_id)
+    try:
+        listing = AuctionListing.objects.get(id=listing_id)
+    except:
+        return HttpResponse(status=404)
+
     if request.user.is_authenticated:
         is_on_watchlist = WatchList.objects.filter(
             user=request.user, listing=listing).exists()

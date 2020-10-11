@@ -77,6 +77,9 @@ class AuctionListing(models.Model):
     def __str__(self):
         return self.item
 
+    def is_valid_listing(self):
+        return self.starting_bid < self.buyout_price and self.expiration > timezone.now() and (self.buyout_price and self.starting_bid) > 0
+
 
 class WatchList(models.Model):
     user = models.ForeignKey(
@@ -100,6 +103,9 @@ class Bid(models.Model):
 
     def __str__(self):
         return f"{self.bidder} - {self.amount} ({self.listing.id} {self.is_active})"
+
+    def is_valid_bid(self):
+        return self.amount > self.listing.starting_bid and not (self.is_winner and self.is_active)
 
 
 class Comment(models.Model):
