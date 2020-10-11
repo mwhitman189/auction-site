@@ -9,6 +9,6 @@ jobs:
     - name: Run Django unit tests
       run: |
         pip3 install --user django
-        pip3 install --user django_crontab
         pip3 install --user setuptools
+        pip3 install --user django_crontab
         python3 manage.py test
