@@ -10,4 +10,5 @@ jobs:
       run: |
         pip3 install --user django
         pip3 install --user django_crontab
+        pip3 install --user setuptools
         python3 manage.py test
